@@ -40,3 +40,5 @@ c  NUFFT 1.3 : Nov 28, 2011.
 c              Adjust parameters and constants for double/quad precision.
 c              Add Matlab/Octave wrappers and mex files.
 c
+c  NUFFT 1.5 : Jan 1, 2014.
+c              Add Kaiser-Bessel window routines.
