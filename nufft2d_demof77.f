@@ -78,7 +78,7 @@ c     -----------------------
          print *, ' ier = ',ier
          print *, ' meomory used = ',lused
          call errcomp(cj0,cj1,nj,err)
-         print *, ' type 1 err = ',err
+         print *, ' type 2 err = ',err
 c
 c     -----------------------
 c      call 2D Type3 method
@@ -96,7 +96,7 @@ c
          print *, ' ier = ',ier
          print *, ' meomory used = ',lused
          call errcomp(fk0,fk1,nk,err)
-         print *, ' type 1 err = ',err
+         print *, ' type 3 err = ',err
       enddo 
       stop
       end

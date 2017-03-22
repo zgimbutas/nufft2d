@@ -72,7 +72,7 @@ c     -----------------------
          call nufft2d2f90(nj,xj,yj,cj1,iflag,eps,ms,mt,fk1,ier)
          print *, ' ier = ',ier
          call errcomp(cj0,cj1,nj,err)
-         print *, ' type 1 err = ',err
+         print *, ' type 2 err = ',err
 c
 c     -----------------------
 c      call 2D Type3 method
@@ -88,7 +88,7 @@ c     -----------------------
 c
          print *, ' ier = ',ier
          call errcomp(fk0,fk1,nk,err)
-         print *, ' type 1 err = ',err
+         print *, ' type 3 err = ',err
       enddo 
       stop
       end
