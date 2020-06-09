@@ -111,7 +111,7 @@ MEX_CC=   $(CXX)
 MW=mwrap
 MWFLAGS=-c99complex -mex        
 ###MEX_LIBS=-lf2c -lm
-MEX_LIBS=-L/usr/local/Cellar/gcc@7/7.4.0_2/lib/gcc/7 -lgfortran -lm -ldl
+MEX_LIBS=-L/usr/local/Cellar/gcc@7/7.5.0_2/lib/gcc/7 -lgfortran -lm -ldl
 MEX_LINK=
 
 MEX_FLAGS=
@@ -136,7 +136,7 @@ MEX_CC=   $(CXX)
 MW=mwrap
 MWFLAGS=-c99complex -mex        
 ###MEX_LIBS=-lgomp -lf2c -lm
-MEX_LIBS=-L/usr/local/Cellar/gcc@7/7.4.0_2/lib/gcc/7 -lgfortran -lgomp -lm -ldl
+MEX_LIBS=-L/usr/local/Cellar/gcc@7/7.5.0_2/lib/gcc/7 -lgfortran -lgomp -lm -ldl
 MEX_LINK=
 
 MEX_FLAGS=
