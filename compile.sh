@@ -1,7 +1,4 @@
 
-make -f makefile.mwrap -j4 TARGET=matlab-windows-w32 clean
-make -f makefile.mwrap -j4 TARGET=matlab-windows-w32 
-
 make -f makefile.mwrap -j4 TARGET=matlab-windows-w64 clean
 make -f makefile.mwrap -j4 TARGET=matlab-windows-w64 
 
