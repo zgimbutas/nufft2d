@@ -3,9 +3,9 @@ function [fk,ier]=nufft2d3(nj,xj,yj,cj,iflag,eps,nk,sk,tk)
 %
 %  [FK,IER] = NUFFT2D3(NJ,XJ,YJ,CJ,IFLAG,NK,SK,TK);
 %
-%                 1  nj
-%     fk(k)    = -- SUM cj(j) exp(+/-i s(k) xj(j)) exp(+/-i t(k) yj(j)) 
-%                nj j=1
+%                  nj
+%     fk(k)    =  SUM cj(j) exp(+/-i s(k) xj(j)) exp(+/-i t(k) yj(j)) 
+%                 j=1
 %
 %     If (iflag .ge.0) the + sign is used in the exponential.
 %     If (iflag .lt.0) the - sign is used in the exponential.
