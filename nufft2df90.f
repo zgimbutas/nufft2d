@@ -2,8 +2,7 @@ cc Copyright (C) 2004-2009: Leslie Greengard and June-Yub Lee
 cc Contact: greengard@cims.nyu.edu
 cc 
 cc This software is being released under a FreeBSD license
-cc (see COPYING in this directory). 
-cc
+cc (see license.txt in this directory). 
 c
 c  NUFFT 1.3 release notes:
 c

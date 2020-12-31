@@ -42,6 +42,7 @@
 ifeq ($(TARGET), octave-linux)
 
 FFLAGS=-g -O2 -fPIC
+FFLAGS=-fast -std=legacy -fPIC
 
 # Use the following for GNU Octave + gfortran
 TESTC99COMPLEX=test_c99_complex
@@ -49,12 +50,13 @@ FC=    gfortran
 CC=    gcc
 CXX=   g++
 MEX=   FFLAGS="-g -O2 -fPIC" mkoctfile --mex
+MEX=   FFLAGS="-fast -std=legacy -fPIC" mkoctfile --mex
 MEX_FC=   $(FC)
 MEX_CC=   $(CXX)
 MW=mwrap
 MWFLAGS=-c99complex -mex	
 ###MEX_LIBS=-lm
-MEX_LIBS=-Wl,--no-undefined -lm -ldl -lgfortran
+MEX_LIBS=-Wl,--no-undefined -lm -ldl -lgfortran -loctinterp
 MEX_LINK=
 
 MEX_FLAGS=
@@ -67,6 +69,7 @@ endif
 ifeq ($(TARGET), octave-linux-openmp)
 
 FFLAGS=-g -O3 --openmp -fPIC
+FFLAGS=-fast -std=legacy --openmp -fPIC
 
 # Use the following for GNU Octave + gfortran
 TESTC99COMPLEX=test_c99_complex
@@ -74,12 +77,13 @@ FC=    gfortran
 CC=    gcc
 CXX=   g++
 MEX=   FFLAGS="-g -O3 --openmp -fPIC" mkoctfile --mex 
+MEX=   FFLAGS="-fast -std=legacy --openmp -fPIC" mkoctfile --mex 
 MEX_FC=   $(FC)
 MEX_CC=   $(CXX)
 MW=mwrap
 MWFLAGS=-c99complex -mex	
 ###MEX_LIBS=-lgomp -lm
-MEX_LIBS=-Wl,--no-undefined -lgomp -lm -ldl -lgfortran
+MEX_LIBS=-Wl,--no-undefined -lgomp -lm -ldl -lgfortran -loctinterp
 MEX_LINK=
 
 MEX_FLAGS=

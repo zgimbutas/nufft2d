@@ -2,7 +2,7 @@ cc Copyright (C) 2004-2009: Leslie Greengard and June-Yub Lee
 cc Contact: greengard@cims.nyu.edu
 cc 
 cc This software is being released under a FreeBSD license
-cc (see COPYING in this directory). 
+cc (see license.txt in this directory). 
 cc
       program testfft
       implicit none
@@ -40,7 +40,8 @@ c     -----------------------
 c
       iflag = 1
       print*,'Starting 2D testing: ', ' nj =',nj, ' ms,mt =',ms,mt
-      do i = 1,4
+      do i = 0,3
+         if (i.eq.0) eps=1d-2
          if (i.eq.1) eps=1d-4
          if (i.eq.2) eps=1d-8
          if (i.eq.3) eps=1d-12

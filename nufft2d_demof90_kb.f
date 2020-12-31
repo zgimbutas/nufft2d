@@ -1,16 +1,8 @@
 cc Copyright (C) 2004-2009: Leslie Greengard and June-Yub Lee 
 cc Contact: greengard@cims.nyu.edu
 cc 
-cc This program is free software; you can redistribute it and/or modify 
-cc it under the terms of the GNU General Public License as published by 
-cc the Free Software Foundation; either version 2 of the License, or 
-cc (at your option) any later version.  This program is distributed in 
-cc the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
-cc even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
-cc PARTICULAR PURPOSE.  See the GNU General Public License for more 
-cc details. You should have received a copy of the GNU General Public 
-cc License along with this program; 
-cc if not, see <http://www.gnu.org/licenses/>.
+cc This software is being released under a FreeBSD license
+cc (see license.txt in this directory). 
 cc
       program testfft
 ccc      implicit none
@@ -61,16 +53,14 @@ c      n2 = 30**2
 c      ms = 30
 c      mt = 30
 
+      ms = 50 
+      mt = 54
 
-      np=24+1
-      ms = np*2
-      mt = np*2+1
-      mt = next235(mt*1.0d0)
       n1 = ms**2/4
       n2 = mt**2
 
       nj = n1*n2
-      write(*,*) ms,mt,nj
+ccc      write(*,*) ms,mt,nj
 c
       do k1 = -n1/2, (n1-1)/2
          do k2 = -n2/2, (n2-1)/2
@@ -88,10 +78,22 @@ c
       iflag = 1
       print*,'Starting 2D testing: ', ' nj =',nj, ' ms,mt =',ms,mt
 
-         call dirft2d1(nj,xj,yj,cj,iflag,ms,mt,fk0)
-         call dirft2d2(nj,xj,yj,cj0,iflag,ms,mt,fk0)
+        t1=second()
+c$         t1=omp_get_wtime()
+        call dirft2d1(nj,xj,yj,cj,iflag,ms,mt,fk0)
+        t2=second()
+c$         t2=omp_get_wtime()
+        write(*,*) 'time, direct=*',t2-t1
 
-      do i = 1,4
+        t1=second()
+c$         t1=omp_get_wtime()
+        call dirft2d2(nj,xj,yj,cj0,iflag,ms,mt,fk0)
+        t2=second()
+c$         t2=omp_get_wtime()
+        write(*,*) 'time, direct=*',t2-t1
+         
+      do i = 0,3
+         if (i.eq.0) eps=1d-2
          if (i.eq.1) eps=1d-4
          if (i.eq.2) eps=1d-8
          if (i.eq.3) eps=1d-12
@@ -112,28 +114,32 @@ c
 
 c
          t1=second()
+c$         t1=omp_get_wtime()
          call nufft2dkbi(nj,xj,yj,eps,ms,mt,ier,w,lw,lused)
          t2=second()
+c$         t2=omp_get_wtime()
          write(*,*) 'init=*',t2-t1
          
          t1=second()
+c$         t1=omp_get_wtime()
          call nufft2d1f90(nj,xj,yj,cj,iflag,eps,ms,mt,fk1,ier)
          t2=second()
-         write(*,*) 'time=*',t2-t1
+c$         t2=omp_get_wtime()
+         write(*,*) 'time, gs=*',t2-t1
 
          call errcomp(fk0,fk1,ms*mt,err)
          print *, ' ier = ',ier
-         call errcomp(fk0,fk1,ms*mt,err)
          print *, ' type 1 err = ',err
 
          t1=second()
+c$         t1=omp_get_wtime()
          call nufft2d1f90kbw(nj,xj,yj,cj,iflag,eps,ms,mt,fk1,ier,w)
          t2=second()
-         write(*,*) 'time=*',t2-t1
+c$         t2=omp_get_wtime()
+         write(*,*) 'time, kb=*',t2-t1
 
          call errcomp(fk0,fk1,ms*mt,err)
          print *, ' ier = ',ier
-         call errcomp(fk0,fk1,ms*mt,err)
          print *, ' type 1 err = ',err
 
 c
@@ -143,21 +149,25 @@ c      call 2D Type 2 method
 c     -----------------------
 
          t1=second()
+c$         t1=omp_get_wtime()
          call nufft2d2f90(nj,xj,yj,cj1,iflag,eps,ms,mt,fk0,ier)
          t2=second()
-         write(*,*) 'time=*',t2-t1
+c$         t2=omp_get_wtime()
+         write(*,*) 'time, gs=*',t2-t1
 
-         print *, ' ier = ',ier
          call errcomp(cj0,cj1,nj,err)
+         print *, ' ier = ',ier
          print *, ' type 2 err = ',err
 
          t1=second()
+c$         t1=omp_get_wtime()
          call nufft2d2f90kbw(nj,xj,yj,cj1,iflag,eps,ms,mt,fk0,ier,w)
          t2=second()
-         write(*,*) 'time=*',t2-t1
+c$         t2=omp_get_wtime()
+         write(*,*) 'time, kb=*',t2-t1
 
-         print *, ' ier = ',ier
          call errcomp(cj0,cj1,nj,err)
+         print *, ' ier = ',ier
          print *, ' type 2 err = ',err
 
          cycle
