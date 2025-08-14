@@ -1,42 +1,45 @@
-ifeq ($(HOST),linux)
+
+ifeq ($(HOST),linux-gfortran)
 
 OBJSUF=o
 MODSUF=mod
-FC=f77 -c 
-FFLAGS=-fast
-FLINK=f77 -o $(PROJECT)
-
-endif
-
-ifeq ($(HOST),macosx)
-
-OBJSUF=o
-MODSUF=mod
-FC=gfortran -c 
+FC=gfortran -c -std=legacy
 FFLAGS=-O3
 FLINK=gfortran -o $(PROJECT)
 
 endif
 
-
-ifeq ($(HOST),linux-openmp)
+ifeq ($(HOST),linux-gfortran-openmp)
 
 OBJSUF=o
 MODSUF=mod
-FC=f77 -c
-FFLAGS=-fast -fopenmp
-FLINK=f77 -fopenmp -o $(PROJECT)
+FC=gfortran -c -std=legacy
+FFLAGS=-O3 --openmp
+FLINK=gfortran -o $(PROJECT) --openmp
+### export OMP_NUM_THREADS=4
+### export OMP_STACKSIZE=1024M
 
 endif
 
-ifeq ($(HOST),macosx-openmp)
+ifeq ($(HOST),macos-gfortran)
 
 OBJSUF=o
 MODSUF=mod
-FC=gfortran -c -fopenmp
+FC=gfortran -c -std=legacy
 FFLAGS=-O3
-FLINK=gfortran -fopenmp -o $(PROJECT)
+FLINK=gfortran -o $(PROJECT) -Wl,-stack_size,0x20000000
 
 endif
 
+ifeq ($(HOST),macos-gfortran-openmp)
+
+OBJSUF=o
+MODSUF=mod
+FC=gfortran -c -std=legacy
+FFLAGS=-O3 --openmp
+FLINK=gfortran -o $(PROJECT) --openmp -Wl,-stack_size,0x20000000
+### export OMP_NUM_THREADS=4
+### export OMP_STACKSIZE=1024M
+
+endif
 
