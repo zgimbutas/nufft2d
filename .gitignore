@@ -1,3 +1,6 @@
 *.o
 *~
 fort.*
+*.mex
+*.mexmaca64
+*.mexa64

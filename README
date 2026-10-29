@@ -40,3 +40,7 @@ c  NUFFT 1.3 : Nov 28, 2011.
 c              Adjust parameters and constants for double/quad precision.
 c              Add Matlab/Octave wrappers and mex files.
 c
+compile_macos.sh builds the Octave (nufft2d.mex) and MATLAB (nufft2d.mexmaca64)
+MEX files on an Apple Silicon Mac (Homebrew octave and gcc, MATLAB R2024b).
+compile_linux.sh builds the Octave (nufft2d.mex) and, with MATLAB=<root>, the
+MATLAB (nufft2d.mexa64) MEX files on Linux x86-64 (needs mkoctfile: octave-dev).
